@@ -4,19 +4,12 @@ def reload
   load 'config/environment.rb'
 end
 
-
-sanfran = Listing.new("Sonata's Hotel", "San Francisco")
-
-sonata = Guest.new("Sonata")
-
-vacation = Trip.new(sanfran, sonata)
-
-philly = Listing.new("Will's Hotel", "Philadelphia")
-
-william = Guest.new("William")
-
-retreat = Trip.new(philly, william)
-
-cruise = Trip.new(sanfran, william)
-binding.pry
-0
+will = Passenger.new("Will Harris")
+mrt = Driver.new("Mr. T")
+will_ride1 = Ride.new(will, mrt, "50.5")
+will_ride2 = Ride.new(will, mrt, "50.5")
+mark = Passenger.new("Mark Harris")
+stallone = Driver.new("Stallone") 
+mark_ride1 = Ride.new(mark, stallone, "50")
+will.drivers
+binding.pry 
