@@ -1,4 +1,4 @@
-# require 'pry'
+require 'pry'
 class Passenger
 	attr_reader :name
 	@@all = [] 
@@ -9,15 +9,24 @@ class Passenger
 	def self.all 
 		@@all 
 	end 
-	def drivers 
-		array1 = Ride.all.select {
+	def rides 
+		Ride.all.select do
 			|ride| ride.passenger == self 
-		}
-		# binding.pry
-		array2 = array1.driver.uniq
-		# binding.pry
-		array2.map {|ride| ride.driver}
-		# binding.pry 
+		end
 	end 
-end 
-# binding.pry
+	def drivers 
+		self.rides.map do 
+			|ride| ride.driver
+		end.uniq 
+	end 
+	def total_distance
+		self.rides.reduce(0) do |distance_total, ride| 
+			distance_total + ride.distance.to_f  
+		end
+	end 
+	def self.premium_members 
+		Passenger.all.select do |passenger| 
+			passenger.total_distance > 100
+		end 
+	end 
+end
